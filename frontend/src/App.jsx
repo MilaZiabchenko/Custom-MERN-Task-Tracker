@@ -2,21 +2,21 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
-  Route,
+  Route
 } from 'react-router-dom';
-import { TasksProvider } from './context/TasksContext';
 import RootLayout from './layout/RootLayout';
-import Home from './pages/Home';
-import TaskDetails from './pages/TaskDetails';
-import About from './pages/About';
+import { Home, About, TaskDetails, NotFound, ErrorBoundary } from './pages';
+import { TasksProvider } from './context/TasksContext';
 import './App.css';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<RootLayout />}>
+    <Route path='/' element={<RootLayout />} errorElement={<ErrorBoundary />}>
       <Route index element={<Home />} />
       <Route path='about' element={<About />} />
       <Route path='task/:taskId' element={<TaskDetails />} />
+      <Route path='not-found' element={<NotFound />} />
+      <Route path='*' element={<NotFound />} />
     </Route>
   )
 );
@@ -28,4 +28,3 @@ const App = () => (
 );
 
 export default App;
-

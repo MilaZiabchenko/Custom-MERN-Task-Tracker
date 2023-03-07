@@ -1,6 +1,11 @@
 import PropTypes from 'prop-types';
 
-const FilterButton = ({ id, activeCategory, handleCategory, children }) => (
+const FilterButtonsItem = ({
+  id,
+  activeCategory,
+  handleCategory,
+  children
+}) => (
   <button
     id={id}
     className={
@@ -12,11 +17,11 @@ const FilterButton = ({ id, activeCategory, handleCategory, children }) => (
   </button>
 );
 
-FilterButton.propTypes = {
+FilterButtonsItem.propTypes = {
   id: PropTypes.string,
   activeCategory: PropTypes.string,
   setActiveCategory: PropTypes.func,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
-export default FilterButton;
+export default FilterButtonsItem;

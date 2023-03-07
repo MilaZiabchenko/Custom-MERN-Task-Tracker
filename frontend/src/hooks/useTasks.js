@@ -1,5 +1,5 @@
 import { useReducer, useState, useEffect } from 'react';
-import { tasksReducer } from './../utils/tasksReducer.js';
+import { tasksReducer } from './../reducers/tasksReducer.js';
 
 const useTasks = url => {
   const [isLoading, setIsLoading] = useState(true);
@@ -7,12 +7,17 @@ const useTasks = url => {
   const [tasks, dispatch] = useReducer(tasksReducer, []);
 
   useEffect(() => {
+    let ignore = false;
+
     const getTasks = async () => {
       try {
         const response = await fetch(url);
 
         if (!response.ok) {
-          setIsLoading(false);
+          if (response.status === 404) {
+            window.location = '/not-found';
+          }
+
           setError(`Oops ${response.status}: ${response.statusText}`);
 
           throw new Error(`Oops, ${response.status}: ${response.statusText}`);
@@ -20,17 +25,23 @@ const useTasks = url => {
 
         const data = await response.json();
 
-        setIsLoading(false);
-        dispatch({ type: 'loaded_tasks', payload: data });
+        if (!ignore) {
+          dispatch({ type: 'loaded_tasks', payload: data });
+        }
       } catch (err) {
-        setIsLoading(false);
         setError(err.message);
 
-        throw new Error(err.message);
+        throw err;
+      } finally {
+        setIsLoading(false);
       }
     };
 
     getTasks();
+
+    return () => {
+      ignore = true;
+    };
   }, [url]);
 
   return { isLoading, error, tasks };

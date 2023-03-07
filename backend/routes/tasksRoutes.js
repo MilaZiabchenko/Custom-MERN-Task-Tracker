@@ -9,6 +9,8 @@ import {
 
 const router = express.Router();
 
+router.use(express.json());
+
 router.get('/', getTasks);
 router.get('/:id', getTask);
 router.put('/:id', updateTask);

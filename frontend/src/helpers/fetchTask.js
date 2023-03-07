@@ -1,4 +1,4 @@
-export const fetchTask = async id => {
+const fetchTask = async id => {
   try {
     const response = await fetch(`/api/tasks/${id}`);
 
@@ -6,10 +6,10 @@ export const fetchTask = async id => {
       throw new Error(`Oops, ${response.status}: ${response.statusText}`);
     }
 
-    const data = response.json();
-
-    return data;
+    return response.json();
   } catch (err) {
-    throw new Error(err.message);
+    throw err;
   }
 };
+
+export { fetchTask };

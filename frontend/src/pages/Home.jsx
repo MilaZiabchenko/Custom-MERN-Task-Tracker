@@ -5,7 +5,7 @@ import TasksList from './../components/TasksList';
 const Home = () => {
   return (
     <>
-      <TasksHeader title={TasksHeader.title} />
+      <TasksHeader />
       <TaskForm />
       <TasksList />
     </>

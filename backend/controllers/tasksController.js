@@ -52,7 +52,7 @@ const deleteTask = asyncWrapper(async (req, res, next) => {
     return next(createCustomError('Invalid task id', 400));
   }
 
-  const task = await Task.findOneAndRemove({ _id: taskId });
+  const task = await Task.findOneAndDelete({ _id: taskId });
 
   if (!task) {
     return next(createCustomError(`No task with id ${taskId}`, 404));

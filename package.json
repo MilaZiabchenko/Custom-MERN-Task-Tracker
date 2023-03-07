@@ -1,22 +1,23 @@
 {
   "name": "task-tracker-server",
-  "version": "1.0.0",
+  "version": "2.4.0",
   "description": "Task tracker MERN app",
   "main": "backend/server.js",
   "type": "module",
   "scripts": {
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
-    "client": "cd frontend && yarn start",
+    "client": "cd frontend && npm run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "keywords": [],
   "author": "Mila Ziabchenko",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "mongoose": "^6.9.0"
+    "mongoose": "^8.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   }
 }
-
